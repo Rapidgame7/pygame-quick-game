@@ -8,7 +8,7 @@ _long = 13
 
 class BackgroundAnim:
     x,y = 0,0
-    scrollspd = 2.5
+    scrollspd = 0.5
     scrollang = random.randint(0,359)
     scrollx = math.sin( math.radians(scrollang) )*scrollspd
     scrolly = math.cos( math.radians(scrollang) )*scrollspd
@@ -28,7 +28,7 @@ class BackgroundAnim:
         self.x = ops.wrap(self.x + self.scrollx, 0, 64)
         self.y = ops.wrap(self.y + self.scrolly, 0, 64)
 
-        self.scrollang += 1
+        self.scrollang += 0.2
         self.recalculateScroll()
         #if self.x > 64: self.x -= 64
         #if self.y > 64: self.y -= 64

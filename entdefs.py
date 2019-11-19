@@ -5,15 +5,26 @@ import pygame
 #import collision_bullshit as Fuck
 import numopers as ops
 
-def _moveBounce(ent, gs, x, y):
-    pass
+def _moveBounce(ent, gs, momx, momy):
+    if ent.x + ent.width + momx > gs.scrsq - gs.hbound:
+        ent.momx = -ent.momx
+        ent.x = gs.scrsq - gs.hbound - ent.width
+    if ent.x + momx < gs.hbound:
+        ent.momx = -ent.momx
+        ent.x = gs.hbound
+    if ent.y + ent.width + momy > gs.scrsq - gs.vbound:
+        ent.momy = -ent.momy
+        ent.y = gs.scrsq - gs.vbound - ent.width
+    if ent.y + momy < gs.vbound:
+        ent.momy = -ent.momy
+        ent.y = gs.vbound
 
 def _plyDaemon(ent, gs):
     keys = pygame.key.get_pressed()
     #print("HI MOM")
-    maxspd = 4
-    spdinc = 1
-    ent.momx,ent.momy = 0,0
+    maxspd = 8
+    spdinc = 2
+    #ent.momx,ent.momy = 0,0
     
     anyhkey = bool(keys[pygame.K_RIGHT] or keys[pygame.K_LEFT])
     anyvkey = bool(keys[pygame.K_UP] or keys[pygame.K_DOWN])
@@ -28,11 +39,13 @@ def _plyDaemon(ent, gs):
     if (keys[pygame.K_DOWN]):
         ent.momy += spdinc
     
-    if not anyhkey: ent.momx = ops.slideToZero(ent.momx, spdinc)
-    if not anyvkey: ent.momy = ops.slideToZero(ent.momy, spdinc)
+    if not anyhkey: ent.momx = ops.slideToZero(ent.momx, spdinc/2)
+    if not anyvkey: ent.momy = ops.slideToZero(ent.momy, spdinc/2)
     
     ent.momx = ops.clamp(ent.momx, -maxspd, maxspd)
     ent.momy = ops.clamp(ent.momy, -maxspd, maxspd)
+
+    #print(ent.momx)
 
 # pylint: disable=W
 def _noDaemon(*args): pass
@@ -41,14 +54,14 @@ def _noCollDaemon(*args): pass
 def commonDaemon(ent, gs):
     #print("sdfasdf")
     if not ent.valid: return
-    ent.momy += ent.gravity
+    #ent.momy += ent.gravity
 
     #if _moveAsFarAsPossibleSolid(ent, gs, ent.momx, 0): ent.momx = 0
     #if _moveAsFarAsPossibleSolid(ent, gs, 0, ent.momy): ent.momy = 0
-    #ent.x += ent.momx
-    #ent.y += ent.momy
-    _moveBounce(ent, gs, ent.momx, 0)
-    _moveBounce(ent, gs, 0, ent.momy)
+    ent.x += ent.momx
+    ent.y += ent.momy
+    _moveBounce(ent, gs, ent.momx, ent.momy)
+    #_moveBounce(ent, gs, 0, ent.momy)
 
 entdefs = {
     "default": {
@@ -66,6 +79,18 @@ entdefs = {
         "gravity": 0,
         "sprite": "ball",
         "daemon": _plyDaemon
+    },
+    "bad_ortho": {
+        "width": 16,
+        "height": 16,
+        "sprite": "ball",
+        "daemon": _noDaemon
+    },
+    "coin": {
+        "width": 16,
+        "height": 16,
+        "sprite": "ball",
+        "daemon": _noDaemon
     }
 }
 

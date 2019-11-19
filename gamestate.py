@@ -3,9 +3,14 @@ from ent import Ent
 
 class Gamestate:
     ents = []
+    scrsq = 768
+    hbound = 32
+    vbound = 32
 
     def spawnPlayer(self):
         ply = Ent("player")
+        ply.x = self.scrsq/2
+        ply.y = self.scrsq/2
         self.ents.insert(0, ply)
 
     def castCollisionChecks(self):
