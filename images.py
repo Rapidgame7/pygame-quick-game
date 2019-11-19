@@ -1,3 +1,4 @@
+# pylint: disable=W0603
 import pygame
 _latch = False
 
@@ -9,11 +10,14 @@ images = {}
 
 def hereWeGo():
     # call on main
-    _latch = True
-    for sstr in filenames:
-        images[sstr] = pygame.image.load( "res/" + filenames[sstr] ).convert()
+    global _latch
+    if not _latch:
+        _latch = True
+        for sstr in filenames:
+            images[sstr] = pygame.image.load( "res/" + filenames[sstr] ).convert_alpha()
 
 def get(name):
+    global _latch
     if _latch == True:
         if name in images:
             return images[name]
