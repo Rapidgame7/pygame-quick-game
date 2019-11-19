@@ -1,6 +1,6 @@
 # pylint: disable=W0613
 # w0613 coresponde a "unused argument"
-#import math
+import random
 import pygame
 #import collision_bullshit as Fuck
 import numopers as ops
@@ -47,6 +47,12 @@ def _plyDaemon(ent, gs):
 
     #print(ent.momx)
 
+def plyColl(ent, gs, oent):
+    if ent.kind == "player" and oent.kind == "coin":
+        gs.score += 1
+        oent.x = random.randint(0+32, 768-32-16)
+        oent.y = random.randint(0+32, 768-32-16)
+
 # pylint: disable=W
 def _noDaemon(*args): pass
 def _noCollDaemon(*args): pass
@@ -78,7 +84,8 @@ entdefs = {
         "height": 16,
         "gravity": 0,
         "sprite": "ball",
-        "daemon": _plyDaemon
+        "daemon": _plyDaemon,
+        "colldaemon": plyColl
     },
     "bad_ortho": {
         "width": 16,
@@ -89,7 +96,7 @@ entdefs = {
     "coin": {
         "width": 16,
         "height": 16,
-        "sprite": "ball",
+        "sprite": "vbuck",
         "daemon": _noDaemon
     }
 }

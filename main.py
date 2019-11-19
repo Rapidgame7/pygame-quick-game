@@ -17,7 +17,7 @@ from gamestate import Gamestate
 normfont = pygame.font.Font( pygame.font.get_default_font(), 50 )
 
 
-pygame.display.set_caption("fork knife 2")
+pygame.display.set_caption("fork in electrical socket 2")
 
 
 
@@ -28,7 +28,6 @@ tickerEvent = pygame.event.custom_type()
 pygame.time.set_timer(tickerEvent, target_delay)
 
 state = Gamestate()
-state.spawnPlayer()
 
 def tick():
     pass
@@ -40,17 +39,22 @@ while 1:
         if event.type == tickerEvent: castTick = True
 
     if castTick:
+        keys = pygame.key.get_pressed()
+
         # predraw time (bg stuf)
         msurf.fill(blackbg)
 
         gridsurf = pygame.Surface([768,768])
-        gridsurf.blit( normfont.render("fortnite 2 pre release", True, (255,255,255)) , [0,0])
+        #bgstr = "v-buck generator episode 5"
+        bgstr = "v-bucks: " + str(state.score)
+        gridsurf.blit( normfont.render(bgstr, True, (255,255,255)) , [0,0])
         bggrid.daemon(gridsurf)
         gridsurf.set_alpha(128)
         msurf.blit(gridsurf, [0,0])
 
         # game time
-        
+        if keys[pygame.K_r]:
+            state.restartGame()
         state.castDaemons()
         state.castCollisionChecks()
 

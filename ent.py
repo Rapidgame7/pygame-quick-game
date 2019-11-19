@@ -35,8 +35,8 @@ class Ent:
         ed.commonDaemon(self, gs)
         self.daemon(self, gs)
     
-    def castCollDaemon(self, other):
-        self.colldaemon(other)
+    def castCollDaemon(self, gs, other):
+        self.colldaemon(self, gs, other)
 
     def _assign(self, kind):
         #entdefs["none"]["daemon"](self)

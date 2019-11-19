@@ -6,7 +6,8 @@ filenames = {
     "default": "_.png",
     "bggrid": "bggrid.png",
 
-    "ball": "ball.png"
+    "ball": "ball.png",
+    "vbuck": "vbuck.png"
 }
 images = {}
 
