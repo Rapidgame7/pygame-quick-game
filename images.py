@@ -4,7 +4,9 @@ _latch = False
 
 filenames = {
     "default": "_.png",
-    "bggrid": "bggrid.png"
+    "bggrid": "bggrid.png",
+
+    "ball": "ball.png"
 }
 images = {}
 
