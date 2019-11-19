@@ -18,29 +18,38 @@ normfont = pygame.font.Font( pygame.font.get_default_font(), 50 )
 pygame.display.set_caption("fork knife 2")
 
 
-target_delay = int(1000 / 60)
 
 bggrid = bg.BackgroundAnim()
 
+target_delay = int(1000 / 60)
+tickerEvent = pygame.event.custom_type()
+pygame.time.set_timer(tickerEvent, target_delay)
+
+def tick():
+    pass
+
 while 1:
+    castTick = False
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
-    # predraw time
-    msurf.fill(blackbg)
-    
-    gridsurf = pygame.Surface([768,768])
-    gridsurf.blit( normfont.render("fortnite 2 pre release", True, (255,255,255)) , [0,0])
-    bggrid.daemon(gridsurf)
-    gridsurf.set_alpha(128)
-    msurf.blit(gridsurf, [0,0])
+        if event.type == tickerEvent: castTick = True
 
-    # game time
+    if castTick:
+        # predraw time
+        msurf.fill(blackbg)
+
+        gridsurf = pygame.Surface([768,768])
+        gridsurf.blit( normfont.render("fortnite 2 pre release", True, (255,255,255)) , [0,0])
+        bggrid.daemon(gridsurf)
+        gridsurf.set_alpha(128)
+        msurf.blit(gridsurf, [0,0])
+
+        # game time
+
+        # draw time
 
 
-    # draw time
+        pygame.display.flip()
 
-    
-    pygame.display.flip()
-
-    pygame.time.delay( target_delay )
+        #pygame.time.delay( target_delay )
     
