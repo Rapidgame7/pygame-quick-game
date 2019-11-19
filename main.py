@@ -10,6 +10,7 @@ import images as img
 img.hereWeGo()
 
 import bg
+import collision_bullshit as Fuck
 
 
 normfont = pygame.font.Font( pygame.font.get_default_font(), 50 )
@@ -35,7 +36,7 @@ while 1:
         if event.type == tickerEvent: castTick = True
 
     if castTick:
-        # predraw time
+        # predraw time (bg stuf)
         msurf.fill(blackbg)
 
         gridsurf = pygame.Surface([768,768])
@@ -45,6 +46,10 @@ while 1:
         msurf.blit(gridsurf, [0,0])
 
         # game time
+        
+
+
+
 
         # draw time
 
