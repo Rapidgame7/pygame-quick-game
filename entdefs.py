@@ -3,6 +3,7 @@
 import random
 import pygame
 import collision_bullshit as Fuck
+import math
 import numopers as ops
 import sfx as sfx
 
@@ -55,10 +56,17 @@ def plyColl(ent, gs, oent):
             gs.score += 1
             oent.x = random.randint(0+32, 768-32-16)
             oent.y = random.randint(0+32, 768-32-16)
+
             bb = gs.spawnEnt("badball")
             bb.x = random.randint(0+32, 768-32-16)
             bb.y = random.randint(0+32, 768-32-16)
-            bb.momy = 8
+
+            force = 6
+            mdir = random.choice([0,90,180,270])
+            bb.momx = math.sin( math.radians(mdir) )*force
+            bb.momy = math.cos( math.radians(mdir) )*force
+            #bb.momy = 8
+
         if oent.kind == "badball" and oent.lifetime > 60:
             ent.valid = False
     if not ent.valid: sfx.stopSong()
