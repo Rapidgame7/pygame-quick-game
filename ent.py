@@ -17,6 +17,7 @@ class Ent:
     gang = 0
 
     lifetime = 0
+    dodraw = True
 
     sprite = "error"
 

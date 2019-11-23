@@ -7,6 +7,8 @@ import math
 import numopers as ops
 import sfx as sfx
 
+_bbGrace = 60*1.5
+
 def _moveBounce(ent, gs, momx, momy):
     if ent.x + ent.width + momx > gs.scrsq - gs.hbound:
         ent.momx = -ent.momx
@@ -61,7 +63,10 @@ def plyColl(ent, gs, oent):
             bb.x = random.randint(0+32, 768-32-16)
             bb.y = random.randint(0+32, 768-32-16)
 
-            force = 6
+            rnd = random.random()
+            poss = (rnd*gs.score)/2
+            print(poss)
+            force = max(2, min(12, (rnd*gs.score)/2))
             ohmy = not (gs.score % 5 == 0)
             mdir = 0
             if ohmy:
@@ -73,9 +78,14 @@ def plyColl(ent, gs, oent):
             bb.momy = math.cos( math.radians(mdir) )*force
             #bb.momy = 8
 
-        if oent.kind == "badball" and oent.lifetime > 60:
+        if oent.kind == "badball" and oent.lifetime > _bbGrace:
             ent.valid = False
     if not ent.valid: sfx.stopSong()
+
+def bbDaemon(ent, gs):
+    if int(ent.lifetime/4)%2 == 0 and ent.lifetime < _bbGrace:
+        ent.dodraw = False
+    else: ent.dodraw = True
 
 # pylint: disable=W
 def _noDaemon(*args): pass
@@ -127,7 +137,7 @@ entdefs = {
         "width": 16,
         "height": 16,
         "sprite": "redball",
-        "daemon": _noDaemon
+        "daemon": bbDaemon
     }
 }
 

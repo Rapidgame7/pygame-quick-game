@@ -69,7 +69,7 @@ while 1:
         # draw time
         for ent in state.ents:
             spr = img.get(ent.sprite)
-            if spr is not None:
+            if ent.dodraw and spr is not None:
                 #print("french")
                 pos = [ent.x, ent.y]
                 msurf.blit(spr, pos)
