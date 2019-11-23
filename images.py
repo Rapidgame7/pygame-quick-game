@@ -8,6 +8,7 @@ filenames = {
 
     "ball": "ball.png",
     "redball": "redball.png",
+    "yelball": "yelball.png",
     "vbuck": "vbuck.png"
 }
 images = {}

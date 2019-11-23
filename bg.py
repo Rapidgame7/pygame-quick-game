@@ -14,12 +14,19 @@ class BackgroundAnim:
     scrolly = math.cos( math.radians(scrollang) )*scrollspd
     ang = 0
 
+    okthanksval = 0
+
     tile = None
 
     def __init__(self):
         self.tile = images.get("bggrid")
+
+    def okthanks(self, n):
+        self.okthanksval = n
+        self.scrollspd = self.okthanksval/12
     
     def recalculateScroll(self):
+        #self.scroll
         self.scrollx = math.sin( math.radians(self.scrollang) )*self.scrollspd
         self.scrolly = math.cos( math.radians(self.scrollang) )*self.scrollspd
         #print("ok")

@@ -62,7 +62,13 @@ def plyColl(ent, gs, oent):
             bb.y = random.randint(0+32, 768-32-16)
 
             force = 6
-            mdir = random.choice([0,90,180,270])
+            ohmy = not (gs.score % 5 == 0)
+            mdir = 0
+            if ohmy:
+                mdir = random.choice([0,90,180,270])
+            else:
+                mdir = random.randint(0,360)
+                bb.sprite = "yelball"
             bb.momx = math.sin( math.radians(mdir) )*force
             bb.momy = math.cos( math.radians(mdir) )*force
             #bb.momy = 8

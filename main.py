@@ -50,6 +50,7 @@ while 1:
         #bgstr = "v-buck generator episode 5"
         bgstr = "v-bucks: " + str(state.score)
         gridsurf.blit( normfont.render(bgstr, True, (255,255,255)) , [0,0])
+        bggrid.okthanks(state.score)
         bggrid.daemon(gridsurf)
         gridsurf.set_alpha(128)
         msurf.blit(gridsurf, [0,0])
