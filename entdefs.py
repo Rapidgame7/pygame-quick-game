@@ -79,6 +79,7 @@ def plyColl(ent, gs, oent):
             #bb.momy = 8
 
         if oent.kind == "badball" and oent.lifetime > _bbGrace:
+            sfx.playSfx("boom")
             ent.valid = False
     if not ent.valid: sfx.stopSong()
 

@@ -6,7 +6,8 @@ song = "song.ogg"
 
 filenames = {
     #"default": "_.png",
-    "coin": "coin.wav"
+    "coin": "coin.wav",
+    "boom": "boom.wav"
 }
 sfxs = {}
 
