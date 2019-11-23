@@ -8,6 +8,8 @@ blackbg = 0, 0, 0
 
 import images as img
 img.hereWeGo()
+import sfx as sfx
+sfx.hereWeGo()
 
 import bg
 import collision_bullshit as Fuck
@@ -55,6 +57,8 @@ while 1:
         # game time
         if keys[pygame.K_r]:
             state.restartGame()
+            sfx.playSong()
+        state.ents = [ent for ent in state.ents if ent.valid]
         state.castDaemons()
         state.castCollisionChecks()
 

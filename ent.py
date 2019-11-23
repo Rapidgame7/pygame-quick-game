@@ -1,6 +1,7 @@
 import entdefs as ed
 #import sprites as sprites
 
+
 class Ent:
     valid = True # invalid ents are removed at the end of the day
     #gravity = 0.5 No sirve aca
@@ -14,6 +15,8 @@ class Ent:
 
     gx,gy = 0,0 # Graphic pos
     gang = 0
+
+    lifetime = 0
 
     sprite = "error"
 
@@ -32,6 +35,7 @@ class Ent:
         self.colldaemon = ed.getprop(kind, "colldaemon")
 
     def castDaemon(self, gs):
+        self.lifetime += 1
         ed.commonDaemon(self, gs)
         self.daemon(self, gs)
     

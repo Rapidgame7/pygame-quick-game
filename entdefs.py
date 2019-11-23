@@ -2,8 +2,9 @@
 # w0613 coresponde a "unused argument"
 import random
 import pygame
-#import collision_bullshit as Fuck
+import collision_bullshit as Fuck
 import numopers as ops
+import sfx as sfx
 
 def _moveBounce(ent, gs, momx, momy):
     if ent.x + ent.width + momx > gs.scrsq - gs.hbound:
@@ -48,18 +49,27 @@ def _plyDaemon(ent, gs):
     #print(ent.momx)
 
 def plyColl(ent, gs, oent):
-    if ent.kind == "player" and oent.kind == "coin":
-        gs.score += 1
-        oent.x = random.randint(0+32, 768-32-16)
-        oent.y = random.randint(0+32, 768-32-16)
+    if ent.kind == "player":
+        if oent.kind == "coin":
+            sfx.playSfx("coin")
+            gs.score += 1
+            oent.x = random.randint(0+32, 768-32-16)
+            oent.y = random.randint(0+32, 768-32-16)
+            bb = gs.spawnEnt("badball")
+            bb.x = random.randint(0+32, 768-32-16)
+            bb.y = random.randint(0+32, 768-32-16)
+            bb.momy = 8
+        if oent.kind == "badball" and oent.lifetime > 60:
+            ent.valid = False
+    if not ent.valid: sfx.stopSong()
 
 # pylint: disable=W
 def _noDaemon(*args): pass
-def _noCollDaemon(*args): pass
 # pylint: enable=W
 def commonDaemon(ent, gs):
     #print("sdfasdf")
-    if not ent.valid: return
+    if not ent.valid:
+        return
     #ent.momy += ent.gravity
 
     #if _moveAsFarAsPossibleSolid(ent, gs, ent.momx, 0): ent.momx = 0
@@ -77,7 +87,7 @@ entdefs = {
         "sprite": "error",
         "solid": False,
         "daemon": _noDaemon,
-        "colldaemon": _noCollDaemon
+        "colldaemon": _noDaemon
     },
     "player": {
         "width": 16,
@@ -97,6 +107,12 @@ entdefs = {
         "width": 16,
         "height": 16,
         "sprite": "vbuck",
+        "daemon": _noDaemon
+    },
+    "badball": {
+        "width": 16,
+        "height": 16,
+        "sprite": "redball",
         "daemon": _noDaemon
     }
 }

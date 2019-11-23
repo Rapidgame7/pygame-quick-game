@@ -1,6 +1,7 @@
 import collision_bullshit as Fuck
 from ent import Ent
 
+
 class Gamestate:
     ents = []
     scrsq = 768
@@ -9,6 +10,11 @@ class Gamestate:
 
     score = 0
 
+    def spawnEnt(self, kind):
+        x = Ent(kind)
+        self.ents.append(x)
+        return x
+
     def spawnPlayer(self):
         ply = Ent("player")
         ply.x = self.scrsq/2
@@ -16,10 +22,9 @@ class Gamestate:
         self.ents.insert(0, ply)
 
     def spawnCoin(self):
-        coin = Ent("coin")
+        coin = self.spawnEnt("coin")
         coin.x = self.scrsq/2
         coin.y = (self.scrsq/2) + 128
-        self.ents.append(coin)
     
     def restartGame(self):
         self.ents.clear()
