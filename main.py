@@ -19,7 +19,7 @@ from gamestate import Gamestate
 normfont = pygame.font.Font( pygame.font.get_default_font(), 50 )
 
 
-pygame.display.set_caption("fork in electrical socket 2")
+pygame.display.set_caption("Apreta_R.txt: Bloc de notas")
 
 
 
